@@ -57,7 +57,7 @@ public class FindBy implements DoRunIF {
                 .as("carsDbResult");        // should be cars foreign collection where cars is the field/bean in CustomerCarDb class
         MatchOperation matchOperStage = Aggregation.match(Criteria.where("name").is(cusName)) ;
         AggregationOperation replaceRootStage = Aggregation.replaceRoot().withValueOf(ObjectOperators.valueOf("carsDbResult").mergeWith(Aggregation.ROOT));
-        AggregationOperation project = Aggregation.project(Car.class).andInclude("model","brand").andExclude("averagePrice") ;
+        AggregationOperation project = Aggregation.project(Car.class).andInclude("carRefId","model","brand").andExclude("averagePrice") ;
         AggregationOperation unwind = Aggregation.unwind("carsDbResult");
         Aggregation pipeLineAggregation = Aggregation.newAggregation(lookupStage,matchOperStage) ;
         // Aggregation aggregation = Aggregation.newAggregation(lookup,  replaceRoot, project, out);

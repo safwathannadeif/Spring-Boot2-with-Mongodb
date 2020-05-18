@@ -7,10 +7,10 @@ public class Customer {
         private String name;
         private String cusId;
         private List<CarCusInfo> lisOfCarInfo ;
-        private List<Long> refToCars ;
+        private List<String> refToCars ;
     public Customer() {
     }
-    public Customer(String name, String cusId, List<CarCusInfo> lisOfCarInfo, List<Long> refToCars) {
+    public Customer(String name, String cusId, List<CarCusInfo> lisOfCarInfo, List<String> refToCars) {
         this.name = name;
         this.cusId = cusId;
         this.lisOfCarInfo = lisOfCarInfo;
@@ -34,10 +34,10 @@ public class Customer {
     public void setLisOfCarInfo(List<CarCusInfo> lisOfCarInfo) {
         this.lisOfCarInfo = lisOfCarInfo;
     }
-    public List<Long> getRefToCars() {
+    public List<String> getRefToCars() {
         return refToCars;
     }
-    public void setRefToCars(List<Long> refToCars) {
+    public void setRefToCars(List<String> refToCars) {
         this.refToCars = refToCars;
     }
     @Override

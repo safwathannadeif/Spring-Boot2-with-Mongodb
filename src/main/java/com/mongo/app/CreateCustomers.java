@@ -27,12 +27,12 @@ public class CreateCustomers implements DoRunIF {
     }
     private Customer makeNewCustomer(int i) {
         noOfCars = (++noOfCars > MaxCarPerCustomer) ? 0 : noOfCars;
-        List<Long> refToCars = IntStream.range(0, noOfCars).mapToObj(n -> getIdRefOneCar()).collect(Collectors.toList());
+        List<String> refToCars = IntStream.range(0, noOfCars).mapToObj(n -> getIdRefOneCar()).collect(Collectors.toList());
         List<CarCusInfo> carCusInfos = IntStream.range(0, noOfCars).mapToObj(n -> getCarInfo(n)).collect(Collectors.toList());
         Customer cus =  new Customer("name-" + i, "cusId-" + i, carCusInfos, refToCars ) ;
         return cus ;
     }
-    private Long getIdRefOneCar()
+    private String getIdRefOneCar()
     {
         currentCarInx = (++currentCarInx == lisofDbCars.size()) ? 0 : currentCarInx;
        return(lisofDbCars.get(currentCarInx).getCarRefId()) ;

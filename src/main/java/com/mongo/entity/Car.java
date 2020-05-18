@@ -3,13 +3,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "cars")
 public class Car {
-	private Long carRefId ;
+	private String carRefId ;
 	private String brand;
 	private String model;
 	private int averagePrice; //averagePrice
 	private int yearMade;
 	private int noOfCarsSold ;
-	public Car(Long carRefId, String brand, String model, int averagePrice, int yearMade,int sold) {
+	public Car(String carRefId, String brand, String model, int averagePrice, int yearMade,int sold) {
 		this.carRefId = carRefId;
 		this.brand = brand;
 		this.model = model;
@@ -19,10 +19,10 @@ public class Car {
 	}
 	public Car() {
 	}
-	public Long getCarRefId() {
+	public String getCarRefId() {
 		return carRefId;
 	}
-	public void setCarRefId(Long carRefId) {
+	public void setCarRefId(String carRefId) {
 		this.carRefId = carRefId;
 	}
 	public String getBrand() {

@@ -20,14 +20,14 @@ public class SpringRunner {
     }
     //
     //@Order(value = 1)
-    @Component
-    class CmdLineRun implements CommandLineRunner {
+////////  Temp @Component
+////////  Temp  class CmdLineRun implements CommandLineRunner {
         @Autowired
         private ConfigurableApplicationContext context;
         protected final Log logger = LogFactory.getLog(getClass());
         private  EnumRunCases runCase ;
         //
-        @Override
+//////////        TEMP   @Override
         public void run(String... args) throws Exception {
 //Make one run with the runCase
 //-1   runCase =EnumRunCases.RunCreateCars1 ;
@@ -36,7 +36,7 @@ public class SpringRunner {
 //-4    runCase= EnumRunCases.RunFindCustomerAndCars4
 //-5    runCase =EnumRunCases.RunFindBy5 ;
 //-6    runCase       runCase= EnumRunCases.RunFieldsExposingGeneralTest6 ;  ///Not Used
-            runCase =runCase =EnumRunCases.RunFindCustomerAndCars4 ;
+            runCase =runCase =EnumRunCases.RunCreateCustomers3 ;
             try {
                 logger.info("Start cmdLineRun");
                 logger.info("Runing RunCase=" + runCase.getRunId());
@@ -50,4 +50,4 @@ public class SpringRunner {
             }
         }
     }
-}
+////////  Temp}
