@@ -2,7 +2,7 @@ package com.mongo.app;
 import com.mongo.entity.CusCarDetailsDisplay;
 import com.mongo.entity.CusCarDetailsElmDisplay;
 import com.mongo.entity.CustomerCarDb;
-import com.mongo.repo.Repositories;
+import com.mongo.repo.Repositories1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-public class FindCustomerAndCars implements DoRunIF {
+public class FindCustomerAndCars implements DoRunIFWithRepo<Repositories1> {
     protected final Log logger = LogFactory.getLog(getClass());
     @Override
-    public void doRun(Repositories repositories) {
+    public void doRun1(Repositories1 repositories) {
 
     // run-1 By one Cus id One Cus         List<CustomerCarDb> lis2  = repositories.lookupCusCarByCustomerName("name-10") ;
         List<String> lisOfCusIds = Arrays.asList("name-1","name-10","name-15" ) ;

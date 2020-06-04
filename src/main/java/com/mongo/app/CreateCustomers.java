@@ -1,9 +1,11 @@
+//https://www.mockaroo.com/schemas/download   --mock data
+// https://www.randomlists.com/canadian-addresses?qty=600 mock data
 package com.mongo.app;
 import com.mongo.entity.Car;
 import com.mongo.entity.CarCusInfo;
 import com.mongo.entity.Customer;
 import com.mongo.gutil.ColorName;
-import com.mongo.repo.Repositories;
+import com.mongo.repo.Repositories1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class CreateCustomers implements DoRunIF {
+public class CreateCustomers implements DoRunIFWithRepo<Repositories1> {
     protected final Log logger = LogFactory.getLog(getClass());
     private int noOfCars = -1;
     private final int MaxCarPerCustomer = 4;
@@ -19,7 +21,7 @@ public class CreateCustomers implements DoRunIF {
     private int currentCarInx = -1;
     private int colorInx = -1;
     @Override
-    public void doRun(Repositories repositories) {
+    public void doRun1(Repositories1 repositories) {
         lisofDbCars = repositories.findAllCars();
         repositories.dropCustomers(); ;
         List<Customer> lisOfCus = IntStream.range(1, 100).mapToObj(i -> makeNewCustomer(i)).collect(Collectors.toList());
@@ -35,6 +37,8 @@ public class CreateCustomers implements DoRunIF {
     private String getIdRefOneCar()
     {
         currentCarInx = (++currentCarInx == lisofDbCars.size()) ? 0 : currentCarInx;
+        Car car = lisofDbCars.get(currentCarInx) ;
+        int year = car.getYearMade() ;
        return(lisofDbCars.get(currentCarInx).getCarRefId()) ;
 
     }

@@ -1,33 +1,30 @@
 package com.mongo.app;
 import com.mongo.entity.Car;
-import com.mongo.entity.CarCusInfo;
 import com.mongo.entity.Customer;
 import com.mongo.entity.CustomerCarDb;
-import com.mongo.repo.Repositories;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import com.mongo.repo.Repositories1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 import java.util.List;
-public class FindBy implements DoRunIF {
+public class FindBy implements DoRunIFWithRepo<Repositories1> {
     protected final Log logger = LogFactory.getLog(getClass());
-    protected Repositories repositoriesi ;
+    protected Repositories1 repositoriesi ;
     @Override
-    public void doRun(Repositories repositories) {
+    public void doRun1(Repositories1 repositories) {
         repositoriesi = repositories ;
         //try1
-        List<CustomerCarDb> lis2 = tryx1("name-10");
-        lis2.forEach(l2-> logger.info(l2) ) ;
+       List<CustomerCarDb> lis2 = tryx1("name-10");
+       lis2.forEach(l2-> logger.info(l2) ) ;
 
-
+        logger.info("***************** FindBy started") ;
         List<Customer> cusLis = repositories.findCustomerByName("name-8");
         cusLis.forEach(cus-> logger.info(cus) ) ;
         List<Car> carLis = repositories.findCarBycarRefId(Long.valueOf("697950862765211648"));
         carLis.forEach(car-> logger.info(car) ) ;
-
+        logger.info("***************** FindBy end") ;
 //  Spring Mongo https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#preface
 //  https://riptutorial.com/mongodb/example/24559/java-and-spring-example
 // write Own in Spring https://www.sgmoratilla.com/2019-05-23-mixing-spring-data-mongo-queries/

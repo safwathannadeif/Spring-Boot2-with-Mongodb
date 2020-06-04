@@ -1,14 +1,10 @@
 package com.mongo.repo;
-import com.mongo.cfg.ConfigMongoDB;
-import com.mongo.entity.Car;
-import com.mongo.entity.CarSaleTotal;
-import com.mongo.entity.Customer;
-import com.mongo.entity.CustomerCarDb;
+import com.mongo.cfg.ConfigMongoDB1;
+import com.mongo.entity.*;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Sort;
@@ -26,13 +22,17 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.newA
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 @Repository
 @ComponentScan("com.mongo.cfg")
-public class Repositories {
+public class Repositories1 {
     private static final String CAR_COLLECTION = "cars";
     private static final String CUS_COLLECTION = "customers";
+
+    private static final String CAR_COLLECTION2 = "cars2";
+    private static final String CUS_COLLECTION2 = "customers2";
+
     protected final Log logger = LogFactory.getLog(getClass());
     //
     @Autowired
-    ConfigMongoDB configMongoDB;
+    ConfigMongoDB1 configMongoDB;
 
     public MongoTemplate getMongoTemplate() {
         return this.configMongoDB.getMongoTemplate();
@@ -41,19 +41,31 @@ public class Repositories {
     public void saveAllCars(List<Car> lisOfCars) {
         this.configMongoDB.getMongoTemplate().insert(lisOfCars, Car.class);
     }
-
     //
+    public enum FindCusByCases { FindByCusName , FindByCusid} ;
+
     public void saveAllCustomers(List<Customer> lisOfCus) {
         this.configMongoDB.getMongoTemplate().insert(lisOfCus, Customer.class);
     }
-
+    public void saveAllCars2(List<Car2> lisOfCars) {
+        this.configMongoDB.getMongoTemplate().insert(lisOfCars, Car2.class);
+    }
     //
-    public List<CustomerCarDb> lookupCusCarByCustomerName(String cusName) {
+    public List<CustomerCarDb> lookupCusCarByCustomerName(String cusNameOrCusId,FindCusByCases enuCase ) {
         LookupOperation lookup = LookupOperation.newLookup().from("cars")
                 .localField("refToCars").foreignField("carRefId")  //refToCars should be as Mongo field name in prime collection
                 //the local/prime collection is customers. Here local refToCars is a list in customers
                 .as("carsDbResult");        // should be cars foreign collection where cars is the field/bean in CustomerCarDb class
-        MatchOperation matchOperStage = Aggregation.match(Criteria.where("name").is(cusName));
+        MatchOperation matchOperStage =null ;
+        switch(enuCase)
+        {
+            case FindByCusName:
+                matchOperStage = Aggregation.match(Criteria.where("name").is(cusNameOrCusId.trim()));
+                break ;
+            case FindByCusid:
+                matchOperStage = Aggregation.match(Criteria.where("cusId").is(cusNameOrCusId.trim()));
+        }
+       // MatchOperation matchOperStage = Aggregation.match(Criteria.where("name").is(cusName));
         //ProjectionOperation projectAggregation = project("name", "cusId", "lisOfCarInfo.carMileage","$cars.model");
         // Aggregation aggregation = Aggregation.newAggregation(matchStage, projectAggregation,lookup);
         Aggregation aggregation = Aggregation.newAggregation(matchOperStage, lookup);

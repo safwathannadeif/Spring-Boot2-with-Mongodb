@@ -4,7 +4,7 @@ public class ColorName {
         String name = "UNKNOWN";
         switch (c) {
             case 0:
-                name ="AMBER" ;
+                name ="SILVER" ;
                 break ;
             case 1:
                 name = "BLACK";
@@ -28,7 +28,7 @@ public class ColorName {
                 name = "YELLOW";
                 break;
             case 8:
-                name = "WHITE";
+                name = "GOLD";
                 break;
             case 9:
                 name= "BEIGE" ;
@@ -36,6 +36,40 @@ public class ColorName {
             case 10:
                 name="BROWN" ;
                 break ;
+            case 11:
+                name="DARKKHAKI" ;
+                break ;
+            case 12:
+                name="DARKORANGE" ;
+                break ;
+            case 13:
+                name="ALICEBLUE" ;
+                break ;
+            case 14:
+                name="CHOCOLATE" ;
+                break ;
+            case 15:
+                name="OLIVE" ;
+                break ;
+            case 16:
+                name="LIGHTGRAY" ;
+                break ;
+            case 17:
+                name="TURQUOISE" ;
+                break ;
+            case 18:
+                name="PLUM" ;
+                break ;
+            case 19:
+                name="DEEPSKYBLUE" ;
+                break ;
+            case 20:
+                name="SALMON" ;
+                break ;
+            case 21:
+                name="DARKGREEN" ;
+                break ;
+
         }
         return name;
     }

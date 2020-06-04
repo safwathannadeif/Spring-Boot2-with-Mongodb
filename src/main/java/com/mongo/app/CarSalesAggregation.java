@@ -1,15 +1,14 @@
 package com.mongo.app;
-import com.mongo.entity.Car;
 import com.mongo.entity.CarSaleTotal;
-import com.mongo.repo.Repositories;
+import com.mongo.repo.Repositories1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
-public class CarSalesAggregation implements DoRunIF {
+public class CarSalesAggregation implements DoRunIFWithRepo<Repositories1> {
     protected final Log logger = LogFactory.getLog(getClass());
     @Override
-    public void doRun(Repositories repositories) {
+    public void doRun1(Repositories1 repositories) {
         logger.info("%%%%%%%% Car All %%%%%%%%");
         List<CarSaleTotal> all1 = repositories.aggregationByAll(); //findAllCars   //aggregationByAll
         for (CarSaleTotal sales : all1) {

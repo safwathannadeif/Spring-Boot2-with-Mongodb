@@ -5,6 +5,7 @@ public class CarCusInfo {
     protected String  carColor ;
     protected int carMileage ;
     protected String plateId  ;
+    protected String dateOfSell ; // How to make this date
 
     public CarCusInfo() {
     }
@@ -12,6 +13,8 @@ public class CarCusInfo {
         this.carColor = carColor;
         this.carMileage = carMileage;
         this.plateId = plateId;
+
+
     }
     public String getCarColor() {
         return carColor;
