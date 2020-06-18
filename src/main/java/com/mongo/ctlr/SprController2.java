@@ -9,9 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
     @RestController
@@ -27,6 +25,14 @@ import java.util.List;
         public List<Car2> getAllCars2() {
 
             return( repositories2.findAllCars2() ) ;
+        }
+        @PutMapping("/updCar2")
+        public Car2 updCar2(@RequestBody Car2 carToUpd) {
+            logger.info("UpdCar Started " + carToUpd.toString() );
+
+            Car2 updtedCar2 = repositories2.updCar2(carToUpd);
+            logger.info("UpdCar Done " + updtedCar2.toString() );
+            return updtedCar2 ;
         }
 
 }

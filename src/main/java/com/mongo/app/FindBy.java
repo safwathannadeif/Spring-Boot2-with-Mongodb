@@ -11,20 +11,19 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import java.util.List;
 public class FindBy implements DoRunIFWithRepo<Repositories1> {
     protected final Log logger = LogFactory.getLog(getClass());
-    protected Repositories1 repositoriesi ;
+    protected Repositories1 repositoriesi;
     @Override
     public void doRun1(Repositories1 repositories) {
-        repositoriesi = repositories ;
+        repositoriesi = repositories;
         //try1
-       List<CustomerCarDb> lis2 = tryx1("name-10");
-       lis2.forEach(l2-> logger.info(l2) ) ;
-
-        logger.info("***************** FindBy started") ;
+        List<CustomerCarDb> lis2 = tryx1("name-10");
+        lis2.forEach(l2 -> logger.info(l2));
+        logger.info("***************** FindBy started");
         List<Customer> cusLis = repositories.findCustomerByName("name-8");
-        cusLis.forEach(cus-> logger.info(cus) ) ;
+        cusLis.forEach(cus -> logger.info(cus));
         List<Car> carLis = repositories.findCarBycarRefId(Long.valueOf("697950862765211648"));
-        carLis.forEach(car-> logger.info(car) ) ;
-        logger.info("***************** FindBy end") ;
+        carLis.forEach(car -> logger.info(car));
+        logger.info("***************** FindBy end");
 //  Spring Mongo https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#preface
 //  https://riptutorial.com/mongodb/example/24559/java-and-spring-example
 // write Own in Spring https://www.sgmoratilla.com/2019-05-23-mixing-spring-data-mongo-queries/
@@ -35,8 +34,7 @@ public class FindBy implements DoRunIFWithRepo<Repositories1> {
 //        groupFields.put("docs", employeeDocProjection);
 //        DBObject group = new BasicDBObject("$group", groupFields);
     }
-
-    public List<CustomerCarDb> tryx1(String cusName)  {
+    public List<CustomerCarDb> tryx1(String cusName) {
 //
 //        LookupOperation lookup = LookupOperation.newLookup().from("cars")
 //                .localField("refToCars").foreignField("carRefId")  //refToCars should be as Mongo field name in prime collection
@@ -52,13 +50,13 @@ public class FindBy implements DoRunIFWithRepo<Repositories1> {
                 .localField("refToCars").foreignField("carRefId")  //refToCars should be as Mongo field name in prime collection
                 //the local/prime collection is customers. Here local refToCars is a list in customers
                 .as("carsDbResult");        // should be cars foreign collection where cars is the field/bean in CustomerCarDb class
-        MatchOperation matchOperStage = Aggregation.match(Criteria.where("name").is(cusName)) ;
+        MatchOperation matchOperStage = Aggregation.match(Criteria.where("name").is(cusName));
         AggregationOperation replaceRootStage = Aggregation.replaceRoot().withValueOf(ObjectOperators.valueOf("carsDbResult").mergeWith(Aggregation.ROOT));
-        AggregationOperation project = Aggregation.project(Car.class).andInclude("carRefId","model","brand").andExclude("averagePrice") ;
+        AggregationOperation project = Aggregation.project(Car.class).andInclude("carRefId", "model", "brand").andExclude("averagePrice");
         AggregationOperation unwind = Aggregation.unwind("carsDbResult");
-        Aggregation pipeLineAggregation = Aggregation.newAggregation(lookupStage,matchOperStage) ;
+        Aggregation pipeLineAggregation = Aggregation.newAggregation(lookupStage, matchOperStage);
         // Aggregation aggregation = Aggregation.newAggregation(lookup,  replaceRoot, project, out);
         List<CustomerCarDb> results = this.repositoriesi.getMongoTemplate().aggregate(pipeLineAggregation, "customers", CustomerCarDb.class).getMappedResults();
-        return results ;
+        return results;
     }
 }

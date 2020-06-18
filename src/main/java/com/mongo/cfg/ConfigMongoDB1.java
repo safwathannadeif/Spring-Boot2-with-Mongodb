@@ -11,8 +11,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.core.WriteResultChecking;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
-
 @SuppressWarnings("ALL")
 @Configuration
 public class ConfigMongoDB1 {
@@ -27,7 +25,7 @@ public class ConfigMongoDB1 {
     public MongoTemplate getMongoTemplate() {
         logger.info("......................................  getMongoTemplate   Called...........");
         MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
-        mongoTemplate.setWriteConcern(WriteConcern.ACKNOWLEDGED) ;
+        mongoTemplate.setWriteConcern(WriteConcern.ACKNOWLEDGED);
         mongoTemplate.setWriteResultChecking(WriteResultChecking.EXCEPTION);
         return mongoTemplate;
     }
