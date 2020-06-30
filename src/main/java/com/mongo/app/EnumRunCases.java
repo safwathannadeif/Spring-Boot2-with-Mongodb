@@ -6,11 +6,13 @@ public enum EnumRunCases {
     RunFindCustomerAndCars4(FindCustomerAndCars.class,"R4_FindCustomerAndCars",RepoDbCases.Repo1) ,
     RunFindBy5(FindBy.class,"R5_FindBy",RepoDbCases.Repo1) ,
     RunCreate2Cars6(Create2Cars.class,"R6_Create2Cars",RepoDbCases.Repo2) ,
-    ;
-   // RunFieldsExposingGeneralTest6(FieldsExposingGeneralTest.class,"R6_FieldsExposingGeneralTest6") ;
-    //MongoFilterGeneric
-    // ;
+    RunQuery2CarByColor(FindByColorCar2.class,"R7_QuerCar2ByColor",RepoDbCases.Repo2),
+    RunCusCar2Generators(CusCar2Generators.class,"R8_CusCar2Generators",RepoDbCases.Repo2),
+    RunCus2WithCars2 (LookUpCus2Cars2.class,"R9_Cus2Car2LookUp",RepoDbCases.Repo2),
 
+
+    //cusWithCars
+    ;
     private  Class<? extends DoRunIFWithRepo>  clz ;
     private final String runId;
     private  RepoDbCases repoDbCases;

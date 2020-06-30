@@ -41,7 +41,10 @@ class CmdLineRun implements CommandLineRunner {
 //-4    runCase= EnumRunCases.RunFindCustomerAndCars4
 //-5    runCase =EnumRunCases.RunFindBy5 ;
 //-6    runCase       runCase= EnumRunCases.RunFieldsExposingGeneralTest6 ;  ///Not Used
-            runCase  =EnumRunCases.RunCreate2Cars6 ;
+//-7    runCase  =EnumRunCases.RunCreate2Cars6 ;
+//-8    runCase  =EnumRunCases.RunQuery2CarByColor ;
+//-9    runCase  =EnumRunCases.RunCusCar2Generators ;
+            runCase  =EnumRunCases.RunCus2WithCars2 ;
 
             try {
                 logger.info("Start cmdLineRun");
@@ -53,6 +56,7 @@ class CmdLineRun implements CommandLineRunner {
                         doRunIFi1.doRun1(repositories);
                         break;
                     case Repo2:
+                        logger.info("Start cmdLineRun Repo2");
                         doRunIFi1.doRun1(repositories2);
                         break;
                 }
