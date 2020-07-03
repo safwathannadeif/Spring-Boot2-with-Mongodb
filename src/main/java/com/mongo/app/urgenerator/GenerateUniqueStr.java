@@ -30,17 +30,20 @@ public class GenerateUniqueStr {
     public static BigInteger curValueToEncodDN ;
     public static BigInteger curValueToEncod ;
     public static Boolean dirDn = true ;
-    public BigInteger maxNumToGenrate ;
+    public static BigInteger maxNumToGenrate ;
 
     private static StringBuilder sb = new StringBuilder() ;
 
     public static void main(String[] args) {
-        BigInteger ValuOf26P26 = BigDecimal.valueOf(Math.pow(26, 26)).toBigInteger();
-       // System.out.println( "ValuOf26P26 and ValuOf26P26toStr:["+ ValuOf26P26+"] [" + ValuOf26P26.toString() +"]") ;
-        GenerateUniqueStr generateUniqueStri = new GenerateUniqueStr(1,"p") ;
-        for (int t=0 ; t < 11; t++) {
+       // BigInteger ValuOf26P26 = BigDecimal.valueOf(Math.pow(26, 26)).toBigInteger();
+       System.out.println( "Length Of AlphabetArray= [" + alphabetToCharArray.length+"]") ;
+        GenerateUniqueStr generateUniqueStri = new GenerateUniqueStr(1,"j") ;
+        int counter = 1;
+       // for (int t=0 ; t <= maxNumToGenrate.intValue(); t++) {
+          for (int t=0 ; t <= 9 ; t++) {
+            System.out.println("t Counter :[" + counter + "]") ;
             String outStr = generateUniqueStri.getNextStr();
-            System.out.println("String Result:[" + outStr +"] [ curValueToEncod=" + curValueToEncod  + "]") ;
+            System.out.println("String Result:[" + outStr +"] [ curValueToEncod=" + curValueToEncod  + "] [" + !dirDn + "]") ;
             System.out.println("String To Bigvalue Revers output:[" + generateUniqueStri.valueAsBigIntFrmOutStr(outStr) + "]") ;
             //Check:
             BigInteger decodedValue = decode26(encodedAry);
@@ -48,6 +51,7 @@ public class GenerateUniqueStr {
                 throw new RuntimeException("Encode Value Not Match Decode value Encode/Decode:" + curValueToEncod + "/" + decodedValue) ;
             }
            // System.out.println("Decode26 Check inToEncode/outbackeFromDecode =" + curValueToEncod + "/" + decodedValue);
+            ++counter ;
         }
     }
     private GenerateUniqueStr() { }
@@ -57,6 +61,7 @@ public class GenerateUniqueStr {
         BigInteger starValue =maxNumToGenrate.divide(valueOf(2l)) ;
         curValueToEncodUP=starValue ;
         curValueToEncodDN=starValue.add(valueOf(1l) ); //Adjust First DN to start with the startValue
+        System.out.println("curValueToEncodDN / curValueToEncodUP/starValue" + curValueToEncodDN+"/"+curValueToEncodUP+"/" + starValue) ;
     }
     //Constructor To Resume Generation and Continuity after subsequent
     public GenerateUniqueStr(int lengthi,String lastOutStr) {
@@ -70,8 +75,8 @@ public class GenerateUniqueStr {
             curValueToEncodUP= startValue.add(diff) ;
         } else {
             BigInteger diff = lastInt.subtract(startValue) ;
-            curValueToEncodUP=lastInt.subtract(ONE) ;
-            curValueToEncodDN = startValue.subtract(diff).add(TWO) ;
+            curValueToEncodUP=lastInt ;
+            curValueToEncodDN = startValue.subtract(diff).add(ONE) ;
         }
         dirDn = !dirDn;
     }
@@ -100,7 +105,7 @@ public class GenerateUniqueStr {
         else
         {
             curValueToEncodUP = curValueToEncodUP.add(ONE) ;
-            curValueToEncod= curValueToEncodUP.add(ONE) ;
+            curValueToEncod= curValueToEncodUP ;
         }
         dirDn=!dirDn ;
         if (curValueToEncod.compareTo(valueOf(0l)) == -1 || curValueToEncod.compareTo(maxNumToGenrate) == 1 )

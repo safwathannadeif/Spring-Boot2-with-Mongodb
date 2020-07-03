@@ -14,7 +14,7 @@ public class Customer2Car2Db {
     private String insuranceCompany ;       // inp  id--10
     private String insurancePolicyNum ;      // inp  id--11\
     private String driveLicense  ;
-    private List< CarCusInfo2>      lisOfCarSInfo = new ArrayList<>();
+    private List<CarCusInfo2>      lisOfCarsInfo = new ArrayList<>();
     private List<Car2> cars2DbResult ;  //Should be the as in lookup parm # 4
     public String getCustomerId() {
         return customerId;
@@ -89,10 +89,10 @@ public class Customer2Car2Db {
         this.driveLicense = driveLicense;
     }
     public List<CarCusInfo2> getLisOfCarSInfo() {
-        return lisOfCarSInfo;
+        return lisOfCarsInfo;
     }
     public void setLisOfCarSInfo(List<CarCusInfo2> lisOfCarSInfo) {
-        this.lisOfCarSInfo = lisOfCarSInfo;
+        this.lisOfCarsInfo = lisOfCarSInfo;
     }
     public List<Car2> getCars2DbResult() {
         return cars2DbResult;
@@ -115,7 +115,7 @@ public class Customer2Car2Db {
                 ", insuranceCompany='" + insuranceCompany + '\'' +
                 ", insurancePolicyNum='" + insurancePolicyNum + '\'' +
                 ", driveLicense='" + driveLicense + '\'' +
-                ", lisOfCarSInfo=" + lisOfCarSInfo +
+                ", lisOfCarSInfo=" + lisOfCarsInfo +
                 ", cars2DbResult=" + cars2DbResult +
                 '}';
     }

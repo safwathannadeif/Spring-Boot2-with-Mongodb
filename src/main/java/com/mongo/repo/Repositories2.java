@@ -75,8 +75,8 @@ public List<Customer2Car2Db> cus2WithCars2() {
     List<AggregationOperation> listAgg = new ArrayList<AggregationOperation>();
     listAgg.add(match);
     LookupOperation lookupAgg = Aggregation.lookup("cars2",// Join Table
-            "lisOfCarSInfo.carIdRef",// Query table fields
-            "carRefId",// Join fields in tables
+            "lisOfCarsInfo.carIdRef",// Query table fields
+            "carRefId",// Join fields in Foreigner  table
             "cars2DbResult");// The name of the property in which the data is returned
     listAgg.add(lookupAgg);
     TypedAggregation<Customer2> agg2 = Aggregation.newAggregation(Customer2.class, listAgg);
